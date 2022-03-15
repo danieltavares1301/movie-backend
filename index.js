@@ -17,3 +17,5 @@ const prismaClient = new prisma.PrismaClient();
     console.log(error);
   }
 })();
+
+// teste
