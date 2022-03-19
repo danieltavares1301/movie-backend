@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-//import cors from 'cors';
-//import helmet from 'helmet';
+import cors from 'cors';
+import helmet from 'helmet';
 
 dotenv.config();
 
@@ -11,6 +11,8 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(morgan('dev'));
+app.use(helmet()); // executa a parte de segurança
+app.use(cors()); // define uma política no qual o browser saberá de onde ele requisitará aquela informação
 
 app.get('/', (resquest, response) => {
   response.json({ message: 'Hello World' });
