@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
+import router from './routes';
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(helmet()); // executa a parte de segurança
 app.use(cors()); // define uma política no qual o browser saberá de onde ele requisitará aquela informação
+
+app.use('/api', router);
 
 app.get('/', (resquest, response) => {
   response.json({ message: 'Hello World' });
