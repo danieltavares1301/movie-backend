@@ -7,10 +7,11 @@ const prismaClient = new prisma.PrismaClient();
     await prismaClient.user.create({
       data: {
         name: 'Daniel',
+        email: 'daniel@email.com',
+        password: '123',
         phone: '999999',
         birthDate: new Date(),
         country: 'Brasil',
-        region: 'NORDESTE',
       },
     });
   } catch (error) {

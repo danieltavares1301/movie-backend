@@ -103,7 +103,7 @@ model User {
   role      UserRole @default(USER)
   name      String
   country   String
-  email     String
+  email     String?
   birthDate DateTime
   phone     String? //optional
   Ticket    Ticket[]

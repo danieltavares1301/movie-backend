@@ -5,7 +5,10 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "prisma-generate": "prisma generate",
+    "prisma-migrate-dev": "prisma migrate dev",
+    "prisma-studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^3.11.0",
