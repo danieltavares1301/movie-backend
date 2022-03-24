@@ -1,14 +1,11 @@
 import { Router } from 'express';
 
-import Controller from '../controllers/Controller';
+import MovieRouter from './MovieRouter.js';
+import UserRouter from './UserRouter.js';
 
 const router = Router();
-const controller = new Controller();
 
-router.get('/movie', controller.index);
-router.post('/movie', controller.store);
-router.get('/movie/:id', controller.getOne);
-router.delete('/movie/:id', controller.remove);
-router.put('/movie/:id', controller.update);
+router.use(MovieRouter);
+router.use(UserRouter);
 
 export default router;
