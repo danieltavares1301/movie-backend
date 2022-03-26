@@ -1,8 +1,9 @@
 import prisma from '../prismaClient.js';
 
 class Controller {
-  constructor(entity, validationSchema) {
+  constructor({ entity, validationSchema, prismaOptions }) {
     this.entity = entity;
+    this.prismaOptions = prismaOptions;
     this.validationSchema = validationSchema; // schema de validação dos dados da entidade
     this.prismaClient = prisma;
     this.prismaEntity = prisma[entity]; // será passada a entidade na qual o controller vai agir
@@ -26,6 +27,7 @@ class Controller {
     // Evitar que a aplicação quebre por erro apontado no Prisma
     try {
       const registry = await this.prismaEntity.create({
+        include: this.prismaOptions?.include, // faz com que outras entidades relacionadas apareçam no response
         data: body,
       });
       response.json(registry);
@@ -36,9 +38,12 @@ class Controller {
   }
 
   async index(request, response) {
-    const registries = await this.prismaEntity.findMany();
+    const registries = await this.prismaEntity.findMany({
+      include: this.prismaOptions?.include,
+    });
     response.json(registries);
   }
+
   async update(request, response) {
     const { id } = request.params;
     const { body } = request;

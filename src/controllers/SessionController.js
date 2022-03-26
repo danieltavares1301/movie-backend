@@ -20,7 +20,18 @@ const schema = Joi.object({
 
 class SessionController extends Controller {
   constructor() {
-    super('session', schema);
+    super({
+      entity: 'session',
+      validationSchema: schema,
+      // faz com que entidades apareçam no response
+      prismaOptions: {
+        include: {
+          movie: true,
+          Ticket: true,
+          SessionSeats: true,
+        },
+      },
+    });
   }
   store(request, response) {
     // faz novo movieId
