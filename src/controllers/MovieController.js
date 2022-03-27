@@ -20,7 +20,7 @@ const schema = Joi.object({
 
 class MovieController extends Controller {
   constructor() {
-    super('movie', schema);
+    super({ entity: 'movie', validationSchema: schema });
   }
 }
 export default MovieController;
