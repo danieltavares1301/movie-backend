@@ -55,9 +55,13 @@ class Controller {
     response.json(registry);
   }
   async remove(request, response) {
-    const { id } = request.params;
-    await this.prismaEntity.delete({ where: { id } });
-    response.json({ message: `${this.entity.toUpperCase()} removed` });
+    try {
+      const { id } = request.params;
+      await this.prismaEntity.delete({ where: { id } });
+      response.json({ message: `${this.entity.toUpperCase()} removed` });
+    } catch (error) {
+      response.status(404).json({ message: error.message });
+    }
   }
   async getOne(request, response) {
     const { id } = request.params;
